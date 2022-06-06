@@ -1,7 +1,16 @@
-import { render } from "@testing-library/react";
+import React from "react";
+import { useQuery, gql } from "@apollo/client";
 
-it("renders div on the page", () => {
-  const renderedDiv = render(<div>hello</div>);
+const GET_DOGS = gql`
+  query ExampleQuery {
+    listOfSuggestions
+  }
+`;
+const App = () => {
+  const { loading, error, data } = useQuery(GET_DOGS);
+  console.log("data", data);
 
-  renderedDiv.getByText("hello");
-});
+  return <>this is where dropdown will be</>;
+};
+
+export default App;
