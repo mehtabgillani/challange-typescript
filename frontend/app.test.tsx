@@ -6,9 +6,17 @@ const GET_DOGS = gql`
     listOfSuggestions
   }
 `;
+
+// const GET_DOGS = gql`
+
+//  Mutation ExampleQuery{
+//     getSuggestionWithDate('1st mtp pain or swelling')
+//   }
+// `;
+
 const App = () => {
   const { loading, error, data } = useQuery(GET_DOGS);
-  console.log("data", data);
+  console.log("data", data?.listOfSuggestions);
 
   return <>this is where dropdown will be</>;
 };
