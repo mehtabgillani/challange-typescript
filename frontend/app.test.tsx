@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
-import Page from './page/index'
+import Page from "./page/index";
 const GET_DOGS = gql`
   query ExampleQuery {
     listOfSuggestions
@@ -16,11 +16,8 @@ const GET_DOGS = gql`
 
 const App = () => {
   const { loading, error, data } = useQuery(GET_DOGS);
-  console.log("data", typeof (new Array(data?.listOfSuggestions)));
 
-  return (
-    <Page suggestionList={data?.listOfSuggestions}/>
-  );
+  return <Page suggestionList={data?.listOfSuggestions} />;
 };
 
 export default App;

@@ -1,0 +1,26 @@
+import * as React from "react";
+import Grid from "@mui/material/Grid";
+import { FC } from "react";
+
+interface FuncProp {
+  selectedValue: any;
+}
+const SelectedList: FC<FuncProp> = ({ selectedValue }) => {
+  return (
+    <Grid container>
+      <Grid item xs={4} textAlign="center">
+       
+          {selectedValue.map((value: any) => {
+            console.log("values", value);
+            return(
+              <li>
+{value.value}
+              </li>
+            )
+          })}
+     
+      </Grid>
+    </Grid>
+  );
+};
+export default SelectedList;
