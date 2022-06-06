@@ -15,7 +15,7 @@ const server = new ApolloServer({
     },
     Mutation: {
       getSuggestionWithDate: (parent, args) =>
-        args.items.map((x) => x + " - " + new Date().toISOString()),
+        args.items.map((x:any) => x + " - " + new Date().toISOString()),
     },
   },
 });
