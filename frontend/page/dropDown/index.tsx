@@ -18,6 +18,7 @@ const AutoCompleteDropDown: FC<FuncProp> = ({ list, setSelectedValue }) => {
           className="basic-multi-select user_multiselect"
           classNamePrefix="select"
           onChange={(e: any) => {
+            console.log("e.target.value",e.target)
             setSelectedValue(e);
           }}
         />

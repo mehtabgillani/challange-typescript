@@ -1,6 +1,6 @@
-import * as React from "react";
+import { FC, useState } from "react";
+import React, { useEffect } from "react";
 import Grid from "@mui/material/Grid";
-import { FC } from "react";
 import { useQuery, gql, useMutation } from "@apollo/client";
 interface FuncProp {
   selectedValue: any;
@@ -10,26 +10,17 @@ let items = "Acne";
 
 const GET_MUTATED_VALUE = gql`
   mutation ExampleQuery {
-    getSuggestionWithDate {
-      items: a
-    }
+    getSuggestionWithDate (items: "${items}")
   }
 `;
-// export const AddressDeleteDocument = gql`
-//     mutation AddressDelete($id: ID!) {
-//   accountAddressDelete(id: $id) {
-//     user {
-//       addresses {
-//         ...AddressDetailsFragment
-//       }
-//     }
-//   }
-// }
 
 const MutatedSelectedList: FC<FuncProp> = ({ selectedValue }) => {
   const [mutateFunction, { data, loading, error }] =
     useMutation(GET_MUTATED_VALUE);
   console.log("dataasdasd", data);
+  useEffect(() => {
+    mutateFunction();
+  }, []);
   return (
     <Grid container mt={4}>
       <Grid item xs={4} textAlign="center">
