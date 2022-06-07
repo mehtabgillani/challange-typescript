@@ -17,7 +17,7 @@ const GET_MUTATED_VALUE = gql`
 const MutatedSelectedList: FC<FuncProp> = ({ selectedValue }) => {
   const [mutateFunction, { data, loading, error }] =
     useMutation(GET_MUTATED_VALUE);
-  console.log("dataasdasd", data);
+  // console.log("dataasdasd", data);
   useEffect(() => {
     mutateFunction();
   }, []);
@@ -25,7 +25,6 @@ const MutatedSelectedList: FC<FuncProp> = ({ selectedValue }) => {
     <Grid container mt={4}>
       <Grid item xs={4} textAlign="center">
         {selectedValue.map((value: any) => {
-          console.log("values", value);
           return <li>{value.value}</li>;
         })}
       </Grid>
