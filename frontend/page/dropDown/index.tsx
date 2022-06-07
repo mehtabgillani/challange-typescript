@@ -7,24 +7,31 @@ interface FuncProp {
   list: any;
   setSelectedValue: any;
   selectedValue: any;
- 
 }
 const AutoCompleteDropDown: FC<FuncProp> = ({
   list,
   setSelectedValue,
   selectedValue,
-
 }) => {
   const [mutatedArray, setMutatedArray] = useState<any>([]);
   const [item, setItem] = useState<any>();
-  
+  const [removedItem, setRemovedItem] = useState<any>();
+
   const handleRemove: any = (updatedArray: any) => {
-    selectedValue = selectedValue.filter(function (item: any) {
+    let value: any;
+    value = selectedValue.filter(function (item: any, index: any) {
       return !updatedArray.includes(item);
+    });
+    const index = selectedValue.indexOf(value[0]);
+    console.log(index);
+
+
+    setRemovedItem({
+      value: value[0],
+      index: index,
     });
     setSelectedValue(updatedArray);
   };
-
 
   const handleAdd: any = (updatedArray: any) => {
     let value: any;
@@ -35,7 +42,6 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
     setItem(value[0].label);
   };
 
-  
   const GET_MUTATED_VALUE = gql`
   mutation ExampleQuery {
     getSuggestionWithDate (items: "${item}")
@@ -46,16 +52,26 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
 
   useEffect(() => {
     if (data !== undefined) {
-      mutatedArray.push(data.getSuggestionWithDate);
+      const newMutatedArray = [...mutatedArray];
+      newMutatedArray.push(data.getSuggestionWithDate[0]);
+      setMutatedArray(newMutatedArray);
     }
   }, [data]);
+
   useEffect(() => {
     if (item) {
       mutateFunction();
     }
   }, [item]);
 
-  
+  useEffect(() => {
+    if (removedItem) {
+      const newMutatedArray = [...mutatedArray];
+      newMutatedArray.splice(removedItem.index, 1)
+      setMutatedArray(newMutatedArray)
+    }
+  }, [removedItem]);
+
   return (
     <>
       <Grid container>
@@ -80,7 +96,6 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
         <Grid item xs={4} textAlign="center">
           {mutatedArray.length > 0 &&
             mutatedArray.map((value: any) => {
-              // console.log(mutatedArray)
               return <li>{value}</li>;
             })}
         </Grid>
