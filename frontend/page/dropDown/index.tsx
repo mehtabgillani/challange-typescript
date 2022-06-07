@@ -25,7 +25,6 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
     const index = selectedValue.indexOf(value[0]);
     console.log(index);
 
-
     setRemovedItem({
       value: value[0],
       index: index,
@@ -67,8 +66,8 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
   useEffect(() => {
     if (removedItem) {
       const newMutatedArray = [...mutatedArray];
-      newMutatedArray.splice(removedItem.index, 1)
-      setMutatedArray(newMutatedArray)
+      newMutatedArray.splice(removedItem.index, 1);
+      setMutatedArray(newMutatedArray);
     }
   }, [removedItem]);
 
