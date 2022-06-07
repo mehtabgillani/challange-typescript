@@ -8,6 +8,45 @@ interface FuncProp {
   setSelectedValue: any;
   selectedValue: any;
 }
+
+export const handleAdd: any = (
+  updatedArray: any,
+  selectedValue: any,
+  setItem: any,
+  setSelectedValue: any
+) => {
+  let value: any;
+  value = updatedArray.filter(function (item: any) {
+    return !selectedValue.includes(item);
+  });
+  setSelectedValue(updatedArray);
+  setItem(value[0].label);
+};
+
+
+
+export const handleRemove: any = (
+  updatedArray: any,
+  selectedValue: any,
+  setRemovedItem: any,
+  setSelectedValue: any
+) => {
+  let value: any;
+  value = selectedValue.filter(function (item: any, index: any) {
+    return !updatedArray.includes(item);
+  });
+  const index = selectedValue.indexOf(value[0]);
+  console.log(index);
+
+  setRemovedItem({
+    value: value[0],
+    index: index,
+  });
+  setSelectedValue(updatedArray);
+};
+
+
+
 const AutoCompleteDropDown: FC<FuncProp> = ({
   list,
   setSelectedValue,
@@ -16,30 +55,6 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
   const [mutatedArray, setMutatedArray] = useState<any>([]);
   const [item, setItem] = useState<any>();
   const [removedItem, setRemovedItem] = useState<any>();
-
-  const handleRemove: any = (updatedArray: any) => {
-    let value: any;
-    value = selectedValue.filter(function (item: any, index: any) {
-      return !updatedArray.includes(item);
-    });
-    const index = selectedValue.indexOf(value[0]);
-    console.log(index);
-
-    setRemovedItem({
-      value: value[0],
-      index: index,
-    });
-    setSelectedValue(updatedArray);
-  };
-
-  const handleAdd: any = (updatedArray: any) => {
-    let value: any;
-    value = updatedArray.filter(function (item: any) {
-      return !selectedValue.includes(item);
-    });
-    setSelectedValue(updatedArray);
-    setItem(value[0].label);
-  };
 
   const GET_MUTATED_VALUE = gql`
   mutation ExampleQuery {
@@ -83,9 +98,15 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
             classNamePrefix="select"
             onChange={(e: any) => {
               if (e.length == selectedValue.length + 1) {
-                handleAdd(e);
+                // handleAdd(e);
+                handleAdd(e, selectedValue, setItem, setSelectedValue);
               } else if (e.length < selectedValue.length) {
-                handleRemove(e);
+                handleRemove(
+                  e,
+                  selectedValue,
+                  setRemovedItem,
+                  setSelectedValue
+                );
               }
             }}
           />
