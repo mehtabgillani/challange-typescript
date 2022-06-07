@@ -7,17 +7,24 @@ interface FuncProp {
   list: any;
   setSelectedValue: any;
   selectedValue: any;
-  mutatedArray: any;
-  setMutatedArray: any;
+ 
 }
 const AutoCompleteDropDown: FC<FuncProp> = ({
   list,
   setSelectedValue,
   selectedValue,
-  mutatedArray,
-  setMutatedArray,
+
 }) => {
+  const [mutatedArray, setMutatedArray] = useState<any>([]);
   const [item, setItem] = useState<any>();
+  
+  const handleRemove: any = (updatedArray: any) => {
+    selectedValue = selectedValue.filter(function (item: any) {
+      return !updatedArray.includes(item);
+    });
+    setSelectedValue(updatedArray);
+  };
+
 
   const handleAdd: any = (updatedArray: any) => {
     let value: any;
@@ -28,12 +35,7 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
     setItem(value[0].label);
   };
 
-  useEffect(() => {
-    if (item) {
-      mutateFunction();
-    }
-  }, [item]);
-
+  
   const GET_MUTATED_VALUE = gql`
   mutation ExampleQuery {
     getSuggestionWithDate (items: "${item}")
@@ -41,20 +43,19 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
 `;
   const [mutateFunction, { data, loading, error }] =
     useMutation(GET_MUTATED_VALUE);
+
   useEffect(() => {
     if (data !== undefined) {
       mutatedArray.push(data.getSuggestionWithDate);
     }
-    console.log("data", data?.getSuggestionWithDate);
   }, [data]);
-  const handleRemove: any = (updatedArray: any) => {
-    selectedValue = selectedValue.filter(function (item: any) {
-      return !updatedArray.includes(item);
-    });
-    console.log(selectedValue, "that was eliminated");
-    setSelectedValue(updatedArray);
-  };
+  useEffect(() => {
+    if (item) {
+      mutateFunction();
+    }
+  }, [item]);
 
+  
   return (
     <>
       <Grid container>

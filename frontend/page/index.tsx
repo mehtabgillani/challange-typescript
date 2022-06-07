@@ -12,7 +12,6 @@ const Page: FC<FuncProp> = ({
   setSelectedValue,
   suggestionList,
 }) => {
-  const [mutatedArray, setMutatedArray] = useState<any>([]);
   const list: any =
     suggestionList?.length > 0 &&
     suggestionList.map((data: any, index: any) => {
@@ -29,8 +28,6 @@ const Page: FC<FuncProp> = ({
         list={list}
         setSelectedValue={setSelectedValue}
         selectedValue={selectedValue}
-        mutatedArray={mutatedArray}
-        setMutatedArray={setMutatedArray}
       />
     </>
   );
