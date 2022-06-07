@@ -7,13 +7,14 @@ interface FuncProp {
 }
 
 let items = "Acne";
-const GET_MUTATED_VALUE = ()=> {
-  return gql`
-mutation { getSuggestionWithDate (${items}: String)
-}
- `
-}
 
+const GET_MUTATED_VALUE = gql`
+  mutation ExampleQuery {
+    getSuggestionWithDate {
+      items: a
+    }
+  }
+`;
 // export const AddressDeleteDocument = gql`
 //     mutation AddressDelete($id: ID!) {
 //   accountAddressDelete(id: $id) {
@@ -26,7 +27,8 @@ mutation { getSuggestionWithDate (${items}: String)
 // }
 
 const MutatedSelectedList: FC<FuncProp> = ({ selectedValue }) => {
-  const [MutatedSelectedList, { data, loading, error }] =useMutation(GET_MUTATED_VALUE);
+  const [mutateFunction, { data, loading, error }] =
+    useMutation(GET_MUTATED_VALUE);
   console.log("dataasdasd", data);
   return (
     <Grid container mt={4}>
