@@ -3,33 +3,34 @@ import React, { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import SelectOption from "react-select";
 import { gql, useMutation } from "@apollo/client";
-import MutatedList from '../lowerLayout'
+import MutatedList from "../lowerLayout";
+import { handleAdd } from "./functions/handleAdd";
 interface FuncProp {
-  list: any;
+  list: string[];
   setSelectedValue: any;
-  selectedValue: any;
+  selectedValue: string[];
 }
 
-export const handleAdd: any = (
-  updatedArray: any,
-  selectedValue: any,
-  setItem: any,
-  setSelectedValue: any
-) => {
-  console.log("updatedArray",updatedArray)
+// export const handleAdd: any = (
+//   updatedArray: any,
+//   selectedValue: any,
+//   setItem: any,
+//   setSelectedValue: any
+// ) => {
+//   console.log("updatedArray",updatedArray)
 
-  let value: any;
-  value = updatedArray.filter(function (item: any) {
-    return !selectedValue.includes(item);
-  });
-  setSelectedValue(updatedArray);
-  console.log("selectedValue",selectedValue)
-  setItem(value[0].label);
-};
+//   let value: any;
+//   value = updatedArray.filter(function (item: any) {
+//     return !selectedValue.includes(item);
+//   });
+//   setSelectedValue(updatedArray);
+//   console.log("selectedValue",selectedValue)
+//   setItem(value[0].label);
+// };
 
 export const handleRemove: any = (
-  updatedArray: any,
-  selectedValue: any,
+  updatedArray: string[],
+  selectedValue: string[],
   setRemovedItem: any,
   setSelectedValue: any
 ) => {
@@ -38,8 +39,6 @@ export const handleRemove: any = (
     return !updatedArray.includes(item);
   });
   const index = selectedValue.indexOf(value[0]);
-  console.log(index);
-
   setRemovedItem({
     value: value[0],
     index: index,
@@ -52,7 +51,7 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
   setSelectedValue,
   selectedValue,
 }) => {
-  const [mutatedArray, setMutatedArray] = useState<any>([]);
+  const [mutatedArray, setMutatedArray] = useState<string[]>([]);
   const [item, setItem] = useState<any>();
   const [removedItem, setRemovedItem] = useState<any>();
 
@@ -64,8 +63,6 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
   const [mutateFunction, { data, loading, error }] =
     useMutation(GET_MUTATED_VALUE);
 
-  
-
   useEffect(() => {
     if (item) {
       mutateFunction();
@@ -73,8 +70,8 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
   }, [item]);
 
   useEffect(() => {
-    if (data !== undefined ) {
-      const newMutatedArray :any = [...mutatedArray];
+    if (data !== undefined) {
+      const newMutatedArray: any = [...mutatedArray];
       newMutatedArray.push(data.getSuggestionWithDate[0]);
       setMutatedArray(newMutatedArray);
     }
@@ -113,7 +110,9 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
           />
         </Grid>
       </Grid>
-      <MutatedList mutatedArray={mutatedArray}/>
+      <Grid item xs={12} textAlign="center">
+        <MutatedList mutatedArray={mutatedArray} />
+      </Grid>
     </>
   );
 };

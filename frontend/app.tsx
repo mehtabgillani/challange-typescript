@@ -2,7 +2,8 @@ import { FC, useState } from "react";
 import React, { useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 import Page from "./page/index";
-
+import Grid from "@mui/material/Grid";
+import "./style.scss";
 
 const GET_DOGS = gql`
   query ExampleQuery {
@@ -10,18 +11,26 @@ const GET_DOGS = gql`
   }
 `;
 
-
-
 const App = () => {
-  const [selectedValue, setSelectedValue] = useState<any>([]);
+  const [selectedValue, setSelectedValue] = useState<string[]>([]);
   const { loading, error, data } = useQuery(GET_DOGS);
 
   return (
-    <Page
-      suggestionList={data?.listOfSuggestions}
-      selectedValue={selectedValue}
-      setSelectedValue={setSelectedValue}
-    />
+    <Grid container>
+      <Grid
+        className="dropdown"
+        item
+        xs={12}
+        textAlign="center"
+        style={{ paddingLeft: "200px", paddingTop: "20px" }}
+      >
+        <Page
+          suggestionList={data?.listOfSuggestions}
+          selectedValue={selectedValue}
+          setSelectedValue={setSelectedValue}
+        />
+      </Grid>
+    </Grid>
   );
 };
 
