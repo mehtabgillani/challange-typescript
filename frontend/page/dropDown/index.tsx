@@ -6,9 +6,9 @@ import { gql, useMutation } from "@apollo/client";
 import MutatedList from '../lowerLayout'
 import {handleAdd} from './functions/handleAdd'
 interface FuncProp {
-  list: any;
+  list: string[];
   setSelectedValue: any;
-  selectedValue: any;
+  selectedValue: string[];
 }
 
 // export const handleAdd: any = (
@@ -29,8 +29,8 @@ interface FuncProp {
 // };
 
 export const handleRemove: any = (
-  updatedArray: any,
-  selectedValue: any,
+  updatedArray: string[],
+  selectedValue: string[],
   setRemovedItem: any,
   setSelectedValue: any
 ) => {
@@ -53,7 +53,7 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
   setSelectedValue,
   selectedValue,
 }) => {
-  const [mutatedArray, setMutatedArray] = useState<any>([]);
+  const [mutatedArray, setMutatedArray] = useState<string[]>([]);
   const [item, setItem] = useState<any>();
   const [removedItem, setRemovedItem] = useState<any>();
 

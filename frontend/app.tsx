@@ -12,7 +12,7 @@ const GET_DOGS = gql`
 `;
 
 const App = () => {
-  const [selectedValue, setSelectedValue] = useState<any>([]);
+  const [selectedValue, setSelectedValue] = useState<string[]>([]);
   const { loading, error, data } = useQuery(GET_DOGS);
 
   return (

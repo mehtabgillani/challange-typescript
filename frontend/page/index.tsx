@@ -3,9 +3,9 @@ import Grid from "@mui/material/Grid";
 import SelectedList from "./upperLayout";
 import AutoCompleteDropDown from "./dropDown";
 interface FuncProp {
-  selectedValue: any;
+  selectedValue: string[];
   setSelectedValue: any;
-  suggestionList: any;
+  suggestionList: string[];
 }
 const Page: FC<FuncProp> = ({
   selectedValue,
@@ -14,7 +14,7 @@ const Page: FC<FuncProp> = ({
 }) => {
   const list: any =
     suggestionList?.length > 0 &&
-    suggestionList.map((data: any, index: any) => {
+    suggestionList.map((data: string, index: any) => {
       return {
         value: data,
         label: data,
