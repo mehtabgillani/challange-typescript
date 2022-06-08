@@ -15,15 +15,16 @@ export const handleAdd: any = (
   setItem: any,
   setSelectedValue: any
 ) => {
+  console.log("updatedArray",updatedArray)
+
   let value: any;
   value = updatedArray.filter(function (item: any) {
     return !selectedValue.includes(item);
   });
   setSelectedValue(updatedArray);
+  console.log("selectedValue",selectedValue)
   setItem(value[0].label);
 };
-
-
 
 export const handleRemove: any = (
   updatedArray: any,
@@ -44,8 +45,6 @@ export const handleRemove: any = (
   });
   setSelectedValue(updatedArray);
 };
-
-
 
 const AutoCompleteDropDown: FC<FuncProp> = ({
   list,
@@ -98,7 +97,6 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
             classNamePrefix="select"
             onChange={(e: any) => {
               if (e.length == selectedValue.length + 1) {
-                // handleAdd(e);
                 handleAdd(e, selectedValue, setItem, setSelectedValue);
               } else if (e.length < selectedValue.length) {
                 handleRemove(

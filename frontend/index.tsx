@@ -11,7 +11,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 import App from "./app";
-const element = document.getElementById("root");
+const element:any = document.getElementById("root");
 const root = ReactDOM.createRoot(element);
 root.render(
   <>
