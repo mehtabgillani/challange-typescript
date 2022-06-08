@@ -39,8 +39,6 @@ export const handleRemove: any = (
     return !updatedArray.includes(item);
   });
   const index = selectedValue.indexOf(value[0]);
-  console.log(index);
-
   setRemovedItem({
     value: value[0],
     index: index,
