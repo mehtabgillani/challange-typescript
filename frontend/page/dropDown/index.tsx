@@ -65,7 +65,8 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
 
   useEffect(() => {
     if (data !== undefined) {
-      const newMutatedArray = [...mutatedArray];
+      console.log("mutatedArray",mutatedArray)
+      const newMutatedArray :any = [...mutatedArray];
       newMutatedArray.push(data.getSuggestionWithDate[0]);
       setMutatedArray(newMutatedArray);
     }

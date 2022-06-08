@@ -13,9 +13,9 @@ import AutoCompleteDropDown from "./page/dropDown";
 //   { value: "Abdominal pain", label: "Abdominal pain" },
 // ];
 
-describe("handleAddTest", () => {
+describe("AutoCompleteDropDown", () => {
   it("runs without crashing", () => {
-    render(<App />);
+    render(<AutoCompleteDropDown list setSelectedValue selectedValue />);
   });
 });
 
