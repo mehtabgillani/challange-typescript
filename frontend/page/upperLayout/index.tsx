@@ -10,7 +10,6 @@ const SelectedList: FC<FuncProp> = ({ selectedValue }) => {
     <Grid container mb={4}>
       <Grid item xs={4} textAlign="center">
         {selectedValue.map((value: any) => {
-          console.log("values", value);
           return <li>{value.value}</li>;
         })}
       </Grid>

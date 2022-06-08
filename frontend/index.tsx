@@ -10,8 +10,8 @@ const client = new ApolloClient({
   uri: "http://localhost:4000/",
   cache: new InMemoryCache(),
 });
-import App from "./app.test";
-const element = document.getElementById("root");
+import App from "./app";
+const element:any = document.getElementById("root");
 const root = ReactDOM.createRoot(element);
 root.render(
   <>

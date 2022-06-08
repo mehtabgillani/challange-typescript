@@ -2,7 +2,6 @@ import { FC, useState } from "react";
 import React, { useEffect } from "react";
 import SelectedList from "./upperLayout";
 import AutoCompleteDropDown from "./dropDown";
-import MutatedSelectedList from './lowerLayout'
 interface FuncProp {
   selectedValue: any;
   setSelectedValue: any;
@@ -14,8 +13,7 @@ const Page: FC<FuncProp> = ({
   suggestionList,
 }) => {
   const list: any =
-    suggestionList &&
-    suggestionList.length > 0 &&
+    suggestionList?.length > 0 &&
     suggestionList.map((data: any, index: any) => {
       return {
         value: data,
@@ -26,8 +24,11 @@ const Page: FC<FuncProp> = ({
   return (
     <>
       <SelectedList selectedValue={selectedValue} />
-      <AutoCompleteDropDown list={list} setSelectedValue={setSelectedValue} />
-      <MutatedSelectedList selectedValue={selectedValue} />
+      <AutoCompleteDropDown
+        list={list}
+        setSelectedValue={setSelectedValue}
+        selectedValue={selectedValue}
+      />
     </>
   );
 };
