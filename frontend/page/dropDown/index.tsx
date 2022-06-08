@@ -4,28 +4,29 @@ import Grid from "@mui/material/Grid";
 import SelectOption from "react-select";
 import { gql, useMutation } from "@apollo/client";
 import MutatedList from '../lowerLayout'
+import {handleAdd} from './functions/handleAdd'
 interface FuncProp {
   list: any;
   setSelectedValue: any;
   selectedValue: any;
 }
 
-export const handleAdd: any = (
-  updatedArray: any,
-  selectedValue: any,
-  setItem: any,
-  setSelectedValue: any
-) => {
-  console.log("updatedArray",updatedArray)
+// export const handleAdd: any = (
+//   updatedArray: any,
+//   selectedValue: any,
+//   setItem: any,
+//   setSelectedValue: any
+// ) => {
+//   console.log("updatedArray",updatedArray)
 
-  let value: any;
-  value = updatedArray.filter(function (item: any) {
-    return !selectedValue.includes(item);
-  });
-  setSelectedValue(updatedArray);
-  console.log("selectedValue",selectedValue)
-  setItem(value[0].label);
-};
+//   let value: any;
+//   value = updatedArray.filter(function (item: any) {
+//     return !selectedValue.includes(item);
+//   });
+//   setSelectedValue(updatedArray);
+//   console.log("selectedValue",selectedValue)
+//   setItem(value[0].label);
+// };
 
 export const handleRemove: any = (
   updatedArray: any,
@@ -113,7 +114,9 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
           />
         </Grid>
       </Grid>
+      <Grid item xs={12} textAlign="center">
       <MutatedList mutatedArray={mutatedArray}/>
+      </Grid>
     </>
   );
 };
