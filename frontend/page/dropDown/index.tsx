@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import SelectOption from "react-select";
 import { gql, useMutation } from "@apollo/client";
-import MutatedList from '../lowerLayout'
-import {handleAdd} from './functions/handleAdd'
+import MutatedList from "../lowerLayout";
+import { handleAdd } from "./functions/handleAdd";
 interface FuncProp {
   list: string[];
   setSelectedValue: any;
@@ -65,8 +65,6 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
   const [mutateFunction, { data, loading, error }] =
     useMutation(GET_MUTATED_VALUE);
 
-  
-
   useEffect(() => {
     if (item) {
       mutateFunction();
@@ -74,8 +72,8 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
   }, [item]);
 
   useEffect(() => {
-    if (data !== undefined ) {
-      const newMutatedArray :any = [...mutatedArray];
+    if (data !== undefined) {
+      const newMutatedArray: any = [...mutatedArray];
       newMutatedArray.push(data.getSuggestionWithDate[0]);
       setMutatedArray(newMutatedArray);
     }
@@ -115,7 +113,7 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
         </Grid>
       </Grid>
       <Grid item xs={12} textAlign="center">
-      <MutatedList mutatedArray={mutatedArray}/>
+        <MutatedList mutatedArray={mutatedArray} />
       </Grid>
     </>
   );
