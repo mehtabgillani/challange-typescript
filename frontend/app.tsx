@@ -2,6 +2,8 @@ import { FC, useState } from "react";
 import React, { useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 import Page from "./page/index";
+
+
 const GET_DOGS = gql`
   query ExampleQuery {
     listOfSuggestions
