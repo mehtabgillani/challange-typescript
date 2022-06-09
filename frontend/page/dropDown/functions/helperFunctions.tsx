@@ -21,17 +21,19 @@ export const removedItemValue: any = (
   console.log("updatedArray", updatedArray);
   console.log("selectedValue", selectedValue);
   let value: any = [];
-  selectedValue.map((item: any) => {
-    let exists = false;
-    updatedArray.map((updatedItem: any) => {
-      if (item.label == updatedItem.label) {
-        exists = true;
-      }
-    });
-    if (!exists) {
-      value.push(item);
-    }
-  });
-  console.log("value", value);
-  return value;
+  // selectedValue.map((item: any) => {
+  //   let exists = false;
+  //   updatedArray.map((updatedItem: any) => {
+  //     if (item.label == updatedItem.label) {
+  //       exists = true;
+  //     }
+  //   });
+  //   if (!exists) {
+  //     value.push(item);
+  //   }
+  // });
+  console.log("value", selectedValue[2]);
+  return selectedValue[2];
 };
+
+export const log = (logMsg:any) => console.log(logMsg);

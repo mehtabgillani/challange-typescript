@@ -7,17 +7,17 @@ import MutatedList from "../lowerLayout";
 import { handleAdd } from "./functions/helperFunctions";
 import { removedItemValue } from "./functions/helperFunctions";
 
-const updatedArray = [
-  { value: "Acute confusion", label: "Acute confusion" },
-  { value: "Abnormal gait", label: "Abnormal gait" },
-];
-const selectedArray = [
-  { value: "Acute confusion", label: "Acute confusion" },
-  { value: "Abnormal gait", label: "Abnormal gait" },
-  { value: "Acne", label: "Acne" },
-];
-let response: any = removedItemValue(updatedArray, selectedArray);
-console.log("Response of index function", response);
+// const updatedArray = [
+//   { value: "Acute confusion", label: "Acute confusion" },
+//   { value: "Abnormal gait", label: "Abnormal gait" },
+// ];
+// const selectedArray = [
+//   { value: "Acute confusion", label: "Acute confusion" },
+//   { value: "Abnormal gait", label: "Abnormal gait" },
+//   { value: "Acne", label: "Acne" },
+// ];
+// let response: any = removedItemValue(updatedArray, selectedArray);
+// console.log("Response of index function", response);
 
 interface FuncProp {
   list: string[];
