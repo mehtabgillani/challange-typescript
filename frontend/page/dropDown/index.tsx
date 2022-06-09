@@ -4,29 +4,26 @@ import Grid from "@mui/material/Grid";
 import SelectOption from "react-select";
 import { gql, useMutation } from "@apollo/client";
 import MutatedList from "../lowerLayout";
-import { handleAdd } from "./functions/handleAdd";
+import { handleAdd } from "./functions/helperFunctions";
+import { removedItemValue } from "./functions/helperFunctions";
+
+// const updatedArray = [
+//   { value: "Acute confusion", label: "Acute confusion" },
+//   { value: "Abnormal gait", label: "Abnormal gait" },
+// ];
+// const selectedArray = [
+//   { value: "Acute confusion", label: "Acute confusion" },
+//   { value: "Abnormal gait", label: "Abnormal gait" },
+//   { value: "Acne", label: "Acne" },
+// ];
+// let response: any = removedItemValue(updatedArray, selectedArray);
+// console.log("Response of index function", response);
+
 interface FuncProp {
   list: string[];
   setSelectedValue: any;
   selectedValue: string[];
 }
-
-// export const handleAdd: any = (
-//   updatedArray: any,
-//   selectedValue: any,
-//   setItem: any,
-//   setSelectedValue: any
-// ) => {
-//   console.log("updatedArray",updatedArray)
-
-//   let value: any;
-//   value = updatedArray.filter(function (item: any) {
-//     return !selectedValue.includes(item);
-//   });
-//   setSelectedValue(updatedArray);
-//   console.log("selectedValue",selectedValue)
-//   setItem(value[0].label);
-// };
 
 export const handleRemove: any = (
   updatedArray: string[],
@@ -35,12 +32,11 @@ export const handleRemove: any = (
   setSelectedValue: any
 ) => {
   let value: any;
-  value = selectedValue.filter(function (item: any, index: any) {
-    return !updatedArray.includes(item);
-  });
-  const index = selectedValue.indexOf(value[0]);
+  value = removedItemValue(updatedArray, selectedValue);
+  console.log("response when you remove item", value);
+  const index = selectedValue.indexOf(value);
   setRemovedItem({
-    value: value[0],
+    value: value,
     index: index,
   });
   setSelectedValue(updatedArray);
@@ -84,7 +80,7 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
       setMutatedArray(newMutatedArray);
     }
   }, [removedItem]);
-
+  
   return (
     <>
       <Grid container>
