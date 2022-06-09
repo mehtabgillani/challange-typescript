@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import React, { useEffect } from "react";
-import { handleAdd } from "./page/dropDown/functions/handleAdd";
+import { removedItemValue } from "./page/dropDown/functions/helperFunctions";
 import SelectedList from "./page/upperLayout";
 import MutatedList from "./page/lowerLayout";
 import AutoCompleteDropDown from "./page/dropDown";
@@ -18,12 +18,21 @@ describe("Selected Items with mutation result", () => {
   });
 });
 
-
-
-
-describe("handleAdd", () => {
-  it("Will add value in the list", () => {
-    
+describe("handleRemove", () => {
+  it("Will remove item from the array", () => {
+    const updatedArray = [
+      { value: "a", label: "a" },
+      { value: "b", label: "b" },
+    ];
+    const selectedArray = [
+      { value: "a", label: "a" },
+      { value: "b", label: "b" },
+      { value: "c", label: "c" },
+    ];
+    const result = { value: "c", label: "c" };
+    const response = removedItemValue(selectedArray, updatedArray);
+    console.log("this is my response", response);
+    expect(response).toEqual(result);
   });
 });
 
