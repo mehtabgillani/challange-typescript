@@ -12,34 +12,6 @@ interface FuncProp {
   selectedValue: string[];
 }
 
-export const handleAdd: any = (
-  updatedArray: any,
-  selectedValue: any,
-  setItem: any,
-  setSelectedValue: any
-) => {
-  setSelectedValue(updatedArray);
-  let value: any;
-  value = addItemValue(updatedArray, selectedValue);
-  setItem(value.label);
-};
-
-export const handleRemove: any = (
-  updatedArray: string[],
-  selectedValue: string[],
-  setRemovedItem: any,
-  setSelectedValue: any
-) => {
-  let value: any;
-  value = removedItemValue(updatedArray, selectedValue);
-  const index = selectedValue.indexOf(value);
-  setRemovedItem({
-    value: value,
-    index: index,
-  });
-  setSelectedValue(updatedArray);
-};
-
 const AutoCompleteDropDown: FC<FuncProp> = ({
   list,
   setSelectedValue,
@@ -48,6 +20,34 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
   const [mutatedArray, setMutatedArray] = useState<string[]>([]);
   const [item, setItem] = useState<any>();
   const [removedItem, setRemovedItem] = useState<any>();
+
+  const handleAdd: any = (
+    updatedArray: any,
+    selectedValue: any,
+    setItem: any,
+    setSelectedValue: any
+  ) => {
+    setSelectedValue(updatedArray);
+    let value: any;
+    value = addItemValue(updatedArray, selectedValue);
+    setItem(value.label);
+  };
+
+  const handleRemove: any = (
+    updatedArray: string[],
+    selectedValue: string[],
+    setRemovedItem: any,
+    setSelectedValue: any
+  ) => {
+    let value: any;
+    value = removedItemValue(updatedArray, selectedValue);
+    const index = selectedValue.indexOf(value);
+    setRemovedItem({
+      value: value,
+      index: index,
+    });
+    setSelectedValue(updatedArray);
+  };
 
   const GET_MUTATED_VALUE = gql`
   mutation ExampleQuery {
