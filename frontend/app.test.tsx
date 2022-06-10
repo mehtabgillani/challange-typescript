@@ -1,79 +1,58 @@
 import { FC, useState } from "react";
 import React, { useEffect } from "react";
-// import { removedItemValue, log } from "./page/dropDown/functions/helperFunctions";
+import { removedItemValue ,addItemValue} from "./page/dropDown/functions/helperFunctions";
 import SelectedList from "./page/upperLayout";
 import MutatedList from "./page/lowerLayout";
+
 import AutoCompleteDropDown from "./page/dropDown";
 import { render } from "@testing-library/react";
-// import Enzyme, { shallow } from 'enzyme';
+import Page from "./page";
+import { useQuery, gql } from "@apollo/client";
+import App from "./app";
+
+const updatedArray: any = [
+  { value: "Test 1", label: "Test 1" },
+  { value: "Test 2", label: "Test 2" },
+];
+const selectedArray: any = [
+  { value: "Test 1", label: "Test 1" },
+  { value: "Test 2", label: "Test 2" },
+  { value: "Test 3", label: "Test 3" },
+];
+
+const updatedArray1: any = [
+  { value: 'Acne', label: 'Acne' },
+  { value: 'Abnormal gait', label: 'Abnormal gait' },
+  {value: 'Acute confusion', label: 'Acute confusion'}
+];
+const selectedArray1: any = [
+  { value: 'Acne', label: 'Acne' },
+  { value: 'Abnormal gait', label: 'Abnormal gait' },
+];
 
 
-// export const removedItemValue: any = (
-//   updatedArray: any,
-//   selectedValue: any
-// ) => {
-//   console.log("updatedArray", updatedArray);
-//   console.log("selectedValue", selectedValue);
-//   let value: any = [];
-//   selectedValue.map((item: any) => {
-//     let exists = false;
-//     updatedArray.map((updatedItem: any) => {
-//       if (item.label == updatedItem.label) {
-//         exists = true;
-//       }
-//     });
-//     if (!exists) {
-//       value.push(item);
-//     }
-//   });
-//   console.log("value", value[0]);
-//   return value[0];
-// };
 
-
-describe("Selected Items of list showing Correctly", () => {
-  it("runs without crashing", () => {
+describe("Test the DropDown Implementation", () => {
+  it("Selected List is rendered", () => {
     render(<SelectedList selectedValue />);
   });
-});
 
-describe("Selected Items with mutation result", () => {
-  it("runs without crashing", () => {
+  it("Mutated List is rendered", () => {
     render(<MutatedList mutatedArray />);
   });
-});
 
-let removedItemValue = jest.fn()
-jest.mock('./page/dropDown/functions/helperFunctions', () => {
-  return removedItemValue
-})
+  it("Add To Selected List", () => {
+    const result = {value: 'Acute confusion', label: 'Acute confusion'};
+    let addedItemInDropDown = jest.fn().mockImplementation(addItemValue)
+    const response = addedItemInDropDown(updatedArray1,selectedArray1);
+    console.log("response to check",response)
+    expect(response).toEqual(result);
+  });
 
-describe("handleRemove", () => {
-  it("Will remove item from the array", () => {
-    const updatedArray = [
-      { value: "abc", label: "abc" },
-      { value: "def", label: "def" },
-    ];
-    const selectedArray = [
-      { value: "abc", label: "abc" },
-      { value: "def", label: "def" },
-      { value: "ghi", label: "ghi" },
-    ];
-    const result = { value: "ghi", label: "ghi" };
-    // console.log = jest.fn();
-    console.log("dgvhbnjm");
-    // const mockFunction = jest.fn(removedItemValue); 
-    // const toggleInstance = shallow(removedItemValue);
-    
-    const response = removedItemValue(selectedArray, updatedArray);
-    
-    console.log("123", response)
-    expect(response).toBe(result);
+  it("Will show removed item from the array", () => {
+    const result = { value: "Test 3", label: "Test 3" };
+    let removeFromDropDown = jest.fn().mockImplementation(removedItemValue)
+    const response = removeFromDropDown(updatedArray, selectedArray);
+    expect(response).toEqual(result);
   });
 });
-
-// describe("Drop Down working", () => {
-//   it("runs without crashing", () => {
-//     render(<AutoCompleteDropDown selectedValue setSelectedValue list />);
-//   });
-// });
