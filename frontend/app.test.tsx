@@ -41,7 +41,7 @@ describe("Test the DropDown Implementation", () => {
     render(<MutatedList mutatedArray />);
   });
 
-  it("Add To Selected List", () => {
+  it("Will return added item from the array", () => {
     const result = {value: 'Acute confusion', label: 'Acute confusion'};
     let addedItemInDropDown = jest.fn().mockImplementation(addItemValue)
     const response = addedItemInDropDown(updatedArray1,selectedArray1);
@@ -50,7 +50,7 @@ describe("Test the DropDown Implementation", () => {
     expect(response).toEqual(result);
   });
 
-  it("Will show removed item from the array", () => {
+  it("Will return removed item from the array", () => {
     const result = { value: "Test 3", label: "Test 3" };
     let removeFromDropDown = jest.fn().mockImplementation(removedItemValue)
     const response = removeFromDropDown(updatedArray, selectedArray);
