@@ -90,6 +90,7 @@ const AutoCompleteDropDown: FC<FuncProp> = ({
             className="basic-multi-select user_multiselect"
             classNamePrefix="select"
             onChange={(e: any) => {
+              console.log("e",e)
               if (e.length == selectedValue.length + 1) {
                 handleAdd(e, selectedValue, setItem, setSelectedValue);
               } else if (e.length < selectedValue.length) {

@@ -45,6 +45,7 @@ describe("Test the DropDown Implementation", () => {
     const result = {value: 'Acute confusion', label: 'Acute confusion'};
     let addedItemInDropDown = jest.fn().mockImplementation(addItemValue)
     const response = addedItemInDropDown(updatedArray1,selectedArray1);
+    console.log("result",result)
     console.log("response to check",response)
     expect(response).toEqual(result);
   });

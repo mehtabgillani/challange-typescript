@@ -3,15 +3,21 @@ export const addItemValue: any = (
   updatedArray: any,
   selectedValue: any,
 ) => {
-  console.log("updatedArray",updatedArray)
-  console.log("selectedValue",selectedValue)
-  let value: any;
-  value = updatedArray.filter(function (item: any) {
-    return !selectedValue.includes(item);
+  let value: any = [];
+  updatedArray.map((item: any) => {
+    let exists = false;
+    selectedValue.map((selectedItem: any) => {
+      if (item.label == selectedItem.label) {
+        exists = true;
+      }
+    });
+    if (!exists) {
+      value.push(item);
+    }
   });
-  console.log("value i wanted",value[0])
-  return value[0]
-
+  
+  return value[0];
+  
 };
 
 export const removedItemValue: any = (
