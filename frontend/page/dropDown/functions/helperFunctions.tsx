@@ -1,8 +1,4 @@
-
-export const addItemValue: any = (
-  updatedArray: any,
-  selectedValue: any,
-) => {
+export const addItemValue: any = (updatedArray: any, selectedValue: any) => {
   let value: any = [];
   updatedArray.map((item: any) => {
     let exists = false;
@@ -15,9 +11,8 @@ export const addItemValue: any = (
       value.push(item);
     }
   });
-  
+
   return value[0];
-  
 };
 
 export const removedItemValue: any = (
@@ -36,6 +31,6 @@ export const removedItemValue: any = (
       value.push(item);
     }
   });
-  
+
   return value[0];
 };
